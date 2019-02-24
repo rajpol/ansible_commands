@@ -1,0 +1,21 @@
+There are times when you might want to manage users on multiple nodes manually. This may be to fit in with a user creation process that already exists, or to remove a user in a hurry if you find out that they need to have their access revoked. Either way, you can use Ansible ad-hoc commands to add, amend, and delete users across a large number of nodes.
+
+
+You can use the following command to add a user named gduffy to a group called users on every node within your Ansible inventory:
+
+
+#ansible all -m user -a "name=gduffy" comment="Griff Duffy"  group=users password="amadeuppassword"
+
+
+We can also use Ansible to remove users. Issue the following command from your control node to remove the user gduffy from every database node defined in your Ansible inventory:
+
+
+
+#ansible db -m user -a "name=gduffy" state=absent remove=yes"
+
+
+
+We can also easily amend users. Issue the following command from your control node to change the user Beth to use the Korn shell and to change her home directory to /mnt/externalhome on all nodes:
+
+
+#ansible all -m user -a "name=beth shell=/bin/ksh home=/mnt/externalhome"
