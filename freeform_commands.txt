@@ -1,0 +1,17 @@
+Sometimes, you need to be able to run actual shell commands on a range of servers. An excellent example will be to reboot some nodes. This is not something that you would put into your automation stack, but at the same time, it is something you would like to be able to leverage your automation tool to do. Ansible enables you to do this by sending arbitrary commands to a collection of servers.
+
+
+The command is simple and takes the following form:
+
+
+#ansible <ansible group> -a "<shell command>"
+
+
+
+For example, you can issue the following command to reboot all the members of the db group:
+
+
+#ansible mysql -a "reboot -now"
+
+
+It's important to keep an eye on parallelism when you have many hosts. By default, Ansible will send the command to five servers. By adding a -f flag to any command in this chapter, you can increase or decrease this number.
