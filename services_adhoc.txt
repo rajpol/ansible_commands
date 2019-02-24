@@ -1,0 +1,15 @@
+To restart a service, we can use the Ansible service module. This supports various activities such as starting, stopping, and restarting services:
+
+#ansible mysql -m service -a "name=mysql state=restarted"
+
+
+You can also use the service module to stop a service:
+
+
+#ansible mysql -m service -a "name=mysql state=stopped"
+
+
+Alternatively, you can also use the service module to start a service:
+
+
+#ansible mysql -m service -a "name=mysql state=started"
