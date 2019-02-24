@@ -1,0 +1,21 @@
+To install a package on an Ubuntu server we can make use of the apt module. When you specify a module as part of an ad hoc command, you will have access to all the features within that particular module. The following example installs the httpd package on the [web] group within your Ansible inventory:
+
+#ansible web -m apt -a "name=apache2 state=present"
+
+Alternatively, you might want to use this technique to install a certain version of a package. The next example commands every node to install a certain version of Bash:
+
+#ansible all -m apt -a "name=bash=4.3 state=present"
+
+You can even use the apt module to ask the target nodes to update all installed software using the following command:
+
+#ansible all -m apt -a "upgrade=dist"
+
+
+You can use the yum module to install software on RHEL-based machines using the following command:
+
+#ansible all -m yum -a "name=httpd state=present"
+
+Just like the example for Ubuntu servers, you can use Ansible to update all the packages on your RHEL-based servers:
+
+
+#ansible all -m yum -a "name=* state=latest"
