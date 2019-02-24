@@ -19,3 +19,32 @@ We can also easily amend users. Issue the following command from your control no
 
 
 #ansible all -m user -a "name=beth shell=/bin/ksh home=/mnt/externalhome"
+
+
+All you need to use for this recipe is a configured Ansible control node and an Ansible inventory describing your target nodes. You should also have a SSH key, both public and private that you wish to manage.
+
+The first thing we might want to do is create a user and simultaneously create a key for them. This is especially useful if you use a network jump box, as it means that you have no dependency on the user supplying a key; it's an integral part of the process. Run the following command to create a user called Meg with an associated key:
+
+
+#ansible all -m user -a "name=meg generate_ssh_key=yes"
+
+
+Often, a user either has an existing key they wish to use, or needs to change an installed key. The following command will allow you to attach a key to a specified account. This assumes that your key is located in a directory called keys within the working directory from which you run the following command:
+
+
+#ansible all -m copy -a "src=keys/id_rsa dest=/home/beth/.ssh/id_rsa mode=0600"
+
+
+Once a user has their Private key setup, you need to push their public key out to each and every server that they wish to access. The following command adds my public key to all web servers defined within the Ansible inventory. This uses the lookup Ansible function to read the local key and send it to the remote nodes:
+
+
+
+#ansible web_servers -m authorized_key -a "user=michael key="{{ lookup('file', '/home/michael/.ssh/id_rsa.pub') }}""
+
+
+
+
+
+
+
+
