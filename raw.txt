@@ -1,0 +1,5 @@
+#ansible all --sudo --ask-sudo-pass -m raw -a 'sudo apt-get -y install python-simplejson'
+
+In the preceding command, we have used several options. The first two, --sudo and --ask-sudo-pass, tell Ansible that we are employing a user that needs to invoke sudo to issue some of the commands and using --ask-sudo-pass prompts us for the password to pass onto sudo. The -m switch tells Ansible which module we wish to use; in this case, the raw module. Finally, the -a switch is the argument we wish to send to the module; in this case, the command to install the python-simplejson package.
+
+#ansible all --sudo --ask-sudo-pass -m raw -a 'sudo yum -y install python-simplejson'
